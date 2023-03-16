@@ -9,6 +9,10 @@ from models import db, Bakery, BakedGood
 
 fake = Faker()
 
+# everything that runs in the app_context() block has access to current_app.
+# current_app is only available when an application context is pushed. 
+# This happens automatically during requests and CLI commands. 
+# It can be controlled manually with app_context().
 with app.app_context():
 
     BakedGood.query.delete()

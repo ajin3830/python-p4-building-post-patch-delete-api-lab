@@ -62,7 +62,7 @@ def bakery_by_id(id):
 
 @app.route('/baked_goods/by_price')
 def baked_goods_by_price():
-    baked_goods_by_price = BakedGood.query.order_by(BakedGood.price).all()
+    baked_goods_by_price = BakedGood.query.order_by(BakedGood.price.desc()).all()
     baked_goods_by_price_serialized = [ 
         bg.to_dict() for bg in baked_goods_by_price
     ]
@@ -72,7 +72,7 @@ def baked_goods_by_price():
 
 @app.route('/baked_goods/most_expensive')
 def most_expensive_baked_good():
-    most_expensive = BakedGood.query.order_by(BakedGood.price.desc()).limit(1).first()
+    most_expensive = BakedGood.query.order_by(BakedGood.price.desc()).first()
     most_expensive_serialized = most_expensive.to_dict()
 
     response = make_response(
